@@ -9,8 +9,27 @@ string host = server.Host;
 
 foreach (PlayerInfoInterface p in players)
   {
-//Change SLAG to your clan tag which probably all members have reserve slots anyway. This stops your clan members and any other clan friends in the "Res" list being added to the reward and them possibly later getting removed
-  if ((!plugin.isInList(p.Name, "Res")) && ((p.Tag != "SLAG") || (p.Tag != "SL4G")))
+  // New tag extraction code by PapaCharlie9
+  String tag = p.Tag;
+
+    if (String.IsNullOrEmpty(tag) && !p.StatsError) {
+        // Maybe they are using [_-=]XXX[=-_]PlayerName[_-=]XXX[=-_] format
+        Match tm = Regex.Match(p.Name, @"^[=_\-]*([^=_\-]{2,4})[=_\-]");
+        if (tm.Success) {
+            tag = tm.Groups[1].Value;
+        } else {
+            tm = Regex.Match(p.Name, @"[^=_\-][=_\-]([^=_\-]{2,4})[=_\-]*$");
+            if (tm.Success) { 
+                tag = tm.Groups[1].Value;
+            } else {
+                tag = String.Empty;
+            }
+        }
+    }
+
+//This stops your clan members and any other clan friends in the "Res" list being added to the reward and them possibly later getting removed
+
+  if ((!plugin.isInList(p.Name, "Res")) && (!plugin.isInList(tag, "Res")))
     {
     string dir = "Plugins\\BF4\\TempList_" +host+ "_" +port+ ".txt";
     if(File.Exists(dir))
@@ -30,7 +49,7 @@ foreach (PlayerInfoInterface p in players)
         else if (tempname == templastitem)
           {
           //add new player
-          plugin.ConsoleWrite("New Player");
+          plugin.ConsoleWrite("Templist New Player: " + p.FullName);
           DateTime now = DateTime.Now;
           string datestring = now.ToString("d");
           string newlist = namecheck + ", " + p.Name +":" + datestring;
@@ -41,6 +60,7 @@ foreach (PlayerInfoInterface p in players)
     else
       {
       //create new temp file with player
+      plugin.ConsoleWrite("Tempfile New Player: " + p.FullName);
       DateTime now = DateTime.Now;
       string datestring = now.ToString("d");
       string newlist = "Blank, "+p.Name +":"+ datestring;
