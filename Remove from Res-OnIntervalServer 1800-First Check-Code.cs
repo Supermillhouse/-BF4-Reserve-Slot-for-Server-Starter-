@@ -15,17 +15,17 @@ if(File.Exists(dir))
     {
     if (resname != "Blank")
       {
-      string[] rescont = resname.Split(':');
-      if (rescont[3] != datestring)
+      string[] rescount = resname.Split(':');
+      if (rescount[3] != datestring)
         {
-        int value = Convert.ToInt32(rescont[2]);
+        int value = Convert.ToInt32(rescount[2]);
         value--;
-        if ((value == RSOffThresh) && (plugin.GetReservedSlotsList().Contains(rescont[0])))
+        if ((value == RSOffThresh) && (plugin.GetReservedSlotsList().Contains(rescount[0])))
           {
-          plugin.ServerCommand("reservedSlotsList.remove", rescont[0]);
+          plugin.ServerCommand("reservedSlotsList.remove", rescount[0]);
           plugin.ServerCommand("reservedSlotsList.save");
           plugin.ConsoleWrite(value.ToString());
-          namecheck = namecheck.Replace(resname, rescont[0]+":"+ rescont[1] +":"+value.ToString()+":"+ datestring);
+          namecheck = namecheck.Replace(resname, rescount[0]+":"+ rescount[1] +":"+value.ToString()+":"+ datestring);
           plugin.ConsoleWrite(namecheck);
           File.WriteAllText(dir, namecheck);
           }
@@ -39,7 +39,7 @@ if(File.Exists(dir))
           else
           {
           plugin.ConsoleWrite(value.ToString());
-          namecheck = namecheck.Replace(resname, rescont[0]+":"+ rescont[1] +":"+value.ToString() +":"+ datestring);
+          namecheck = namecheck.Replace(resname, rescount[0]+":"+ rescount[1] +":"+value.ToString() +":"+ datestring);
           plugin.ConsoleWrite(namecheck);
           File.WriteAllText(dir, namecheck);
           }

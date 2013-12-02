@@ -4,7 +4,7 @@ plugin.Log("Logs/InsaneLimits/GUID5-7-13.log", plugin.R("[%date% %time%] [%p_ct%
 //The thread code below allows me to delay the reward message on first spawn because directly below this text is a !rules yell. It then yells the reward message 5 seconds later
 
 //simple yell to start for type !rules for server rules
-plugin.SendPlayerMessage(player.Name, "Type !rules for Server Rules" , 0);
+plugin.SendPlayerMessage(player.Name, "Type !rules for Server Rules");
 
 // Closure bindings for the delegate
 string port = server.Port;
@@ -22,12 +22,12 @@ if(File.Exists(dir))
   foreach (string resname in resnames)
     {
     //split the name at ":" in to array, 1st is player name, 2nd is date last updated, 3rd can be ignored, was extra code in second check
-    string[] rescont = resname.Split(':');
-    if (rescont[0] == player.Name)
+    string[] rescount = resname.Split(':');
+    if (rescount[0] == player.Name)
       {
-      if (plugin.GetReservedSlotsList().Contains(rescont[0]))
+      if (plugin.GetReservedSlotsList().Contains(rescount[0]))
         {
-        int value = Convert.ToInt32(rescont[2]);
+        int value = Convert.ToInt32(rescount[2]);
         yellMsg = "You have a reserve slot for helping to start the server, it will expire in approximately "+value+" day(s) unless you help again.";
         break;
         }
@@ -38,9 +38,9 @@ if(File.Exists(dir))
 // Thread delegate
 
 ThreadStart AdminYell = delegate  {
-5 second delay before yelling the reward message
+//5 second delay before yelling the reward message
   Thread.Sleep(5*1000);
-  plugin.SendPlayerMessage(player.Name, yellMsg);
+  plugin.SendPlayerMessage(player.Name, yellMsg); // it is a player message until yell is working
   };
 
 // Main thread code
