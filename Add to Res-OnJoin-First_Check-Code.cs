@@ -4,10 +4,10 @@ players.AddRange(team2.players);
 if (team3.players.Count > 0) players.AddRange(team3.players);
 if (team4.players.Count > 0) players.AddRange(team4.players);
 
-int RSThresh = 5;
-int numoftemps = 6;
-int RSCap = 30;
-int rewarddays = 5;
+int RSThresh = 5;    //When the player should get a reserve slot, when he has this number of days or more.
+int numoftemps = 6;  //Number of players to be copied to reserve list
+int RSCap = 30;      //Max number of reserve slot days
+int rewarddays = 5;  //Number of days rewarded for helping to start the server once
 int totaltcount = server.PlayerCount;
 int i = 0;
 string port = server.Port;
