@@ -93,7 +93,7 @@ else if((totaltcount > 10) && (File.Exists(dir)))
                     plugin.ServerCommand("reservedSlotsList.save");
                     }
                   //message player
-                  plugin.SendPlayerMessage(rescount[0], "You have been awarded a reserve slot for helping to start the server, it will expire in approximately "+value+" days unless you help again.");
+                  plugin.SendPlayerMessage(rescount[0], rescont[0] + ": You have been awarded a reserve slot for helping to start the server, it will expire in approximately "+value+" days unless you help again.");
                   }
                 }
               //notify you that a player tried to help twice or more on a day to start server 
