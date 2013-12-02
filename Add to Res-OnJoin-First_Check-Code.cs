@@ -23,10 +23,10 @@ foreach (PlayerInfoInterface p in players)
   }
 
 
-//check if server population is more than 3
-if ((totaltcount >= 3) && (totaltcount <=10) && (!File.Exists(done)))return true;
-//if server population is less than 3 then delete temp file if it exists
-else if(totaltcount < 3)
+//check if server population is more than 4
+if ((totaltcount >= 4) && (totaltcount <=10) && (!File.Exists(done)))return true;
+//if server population is less than 4 then delete temp file if it exists
+else if(totaltcount < 4)
   {
   if (File.Exists(dir)) File.Delete(dir);
   if (File.Exists(done)) File.Delete(done);
