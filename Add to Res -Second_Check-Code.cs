@@ -41,8 +41,8 @@ foreach (PlayerInfoInterface p in players)
       //stops the names being repeatedly entered in to the list every time it runs
       foreach (string tempname in tempnames)
         {
-        string[] tempcont = tempname.Split(':');
-        if (tempcont[0] == p.Name)
+        string[] tempcount = tempname.Split(':');
+        if (tempcount[0] == p.Name)
           {
           break;
           }    
