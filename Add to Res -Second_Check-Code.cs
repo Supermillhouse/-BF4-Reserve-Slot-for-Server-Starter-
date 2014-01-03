@@ -12,7 +12,7 @@ foreach (PlayerInfoInterface p in players)
   // New tag extraction code by PapaCharlie9
   String tag = p.Tag;
 
-    if (String.IsNullOrEmpty(tag) && !p.StatsError) {
+    if (String.IsNullOrEmpty(tag)) {
         // Maybe they are using [_-=]XXX[=-_]PlayerName[_-=]XXX[=-_] format
         Match tm = Regex.Match(p.Name, @"^[=_\-]*([^=_\-]{2,4})[=_\-]");
         if (tm.Success) {
