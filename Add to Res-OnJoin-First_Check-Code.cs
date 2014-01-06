@@ -5,7 +5,8 @@ if (team3.players.Count > 0) players.AddRange(team3.players);
 if (team4.players.Count > 0) players.AddRange(team4.players);
 
 int RSThresh = 5;    //When the player should get a reserve slot, when he has this number of days or more.
-int numoftemps = 6;  //Number of players to be copied to reserve list
+int numoftemps = 10;  //Number of players to be copied to reserve list
+int triggertransfer = 20;  //When the players list is copied over
 int RSCap = 30;      //Max number of reserve slot days
 int rewarddays = 5;  //Number of days rewarded for helping to start the server once
 int totaltcount = server.PlayerCount;
@@ -24,7 +25,7 @@ foreach (PlayerInfoInterface p in players)
 
 
 //check if server population is more than 4
-if ((totaltcount >= 4) && (totaltcount <=10) && (!File.Exists(done)))return true;
+if ((totaltcount >= 4) && (totaltcount <= triggertransfer) && (!File.Exists(done)))return true;
 //if server population is less than 4 then delete temp file if it exists
 else if(totaltcount < 4)
   {
@@ -32,7 +33,7 @@ else if(totaltcount < 4)
   if (File.Exists(done)) File.Delete(done);
   }
 //check if server population is more than 10 then transfer to ReserveList
-else if((totaltcount > 10) && (File.Exists(dir)))
+else if((totaltcount > triggertransfer) && (File.Exists(dir)))
   {
 
   int runcount = 0;
@@ -91,6 +92,14 @@ else if((totaltcount > 10) && (File.Exists(dir)))
                     {
                     plugin.ServerCommand("reservedSlotsList.add", rescount[0]);
                     plugin.ServerCommand("reservedSlotsList.save");
+                    if (plugin.GetReservedSlotsList().Contains(rescount[0]))
+                      {
+                      plugin.PRoConChat(rescount[0] + " got added to ReserveSlot successfully.");
+                      }
+                    else 
+                      {
+                      plugin.PRoConChat(rescount[0] + " failed to get added to the ReserveSlot.");
+                      }
                     }
                   //message player
                   plugin.SendPlayerMessage(rescount[0], rescount[0] + ": You have been awarded a reserve slot for helping to start the server, it will expire in approximately "+value+" days unless you help again.");
@@ -103,9 +112,9 @@ else if((totaltcount > 10) && (File.Exists(dir)))
             //if not in reserve list adds player and info to end of list.
             else if (resname == reslastitem)
               {
-              plugin.ConsoleWrite("New Player");
               string newlist = resnamecheck + ", " + tempcount[0] +":" + datestring +":"+ rewarddays +":"+ datestring;
               File.WriteAllText(dir2, newlist);
+              plugin.PRoConChat("New Player," + tempcount[0] + "added to end of the reserve slot list.");
               }
             }
           }
@@ -114,6 +123,7 @@ else if((totaltcount > 10) && (File.Exists(dir)))
           {
           string newlist = "Blank, "+tempcount[0] +":"+ datestring +":"+ rewarddays +":"+ datestring;
           File.WriteAllText(dir2, newlist);
+          plugin.PRoConChat("Reserve slot list created with first player," + tempcount[0] + ".");
           }
         }
       else if (runcount >= numoftemps)break;

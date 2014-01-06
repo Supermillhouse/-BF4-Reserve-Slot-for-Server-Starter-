@@ -48,23 +48,23 @@ foreach (PlayerInfoInterface p in players)
           }    
         else if (tempname == templastitem)
           {
-          //add new player
-          plugin.ConsoleWrite("Templist New Player: " + p.FullName);
+          //add new player to temp list
           DateTime now = DateTime.Now;
           string datestring = now.ToString("d");
           string newlist = namecheck + ", " + p.Name +":" + datestring;
           File.WriteAllText(dir, newlist);
+          plugin.PRoConChat("Templist New Player: " + p.FullName);
           }
         }
       }
     else
       {
       //create new temp file with player
-      plugin.ConsoleWrite("Tempfile New Player: " + p.FullName);
       DateTime now = DateTime.Now;
       string datestring = now.ToString("d");
-      string newlist = "Blank, "+p.Name +":"+ datestring;
+      string newlist = "Blank, " + p.Name + ":" + datestring;
       File.WriteAllText(dir, newlist);
+      plugin.PRoConChat("Tempfile created with New Player: " + p.FullName);
       }
     }
   }
