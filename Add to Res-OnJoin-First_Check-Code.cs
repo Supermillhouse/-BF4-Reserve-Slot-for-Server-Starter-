@@ -15,6 +15,7 @@ string port = server.Port;
 string host = server.Host;
 string dir = "Plugins\\BF4\\TempList_" +host+ "_" +port+ ".txt";
 string done = "Plugins\\BF4\\Done_" +host+ "_" +port+ ".txt";
+string logdir = "Logs\\InsaneLimits\\ReserveList_" +host+ "_" +port+ "dump_file.txt";
 
 List<String> listofplayers = new List<String>();
 
@@ -94,11 +95,13 @@ else if((totaltcount > triggertransfer) && (File.Exists(dir)))
                     plugin.ServerCommand("reservedSlotsList.save");
                     if (plugin.GetReservedSlotsList().Contains(rescount[0]))
                       {
-                      plugin.PRoConChat(rescount[0] + " got added to ReserveSlot successfully.");
+                      plugin.PRoConChat(rescount[0] + " got added to ReserveSlot successfully with " + value.ToString() + " day(s) remaining.");
+                      plugin.Log(logdir, rescount[0] + " got added to the ReserveSlot successfully with " + value.ToString() + " day(s) remaining.");
                       }
                     else 
                       {
                       plugin.PRoConChat(rescount[0] + " failed to get added to the ReserveSlot.");
+                      plugin.Log(logdir, rescount[0] + " failed to get added to the ReserveSlot.");
                       }
                     }
                   //message player
@@ -115,6 +118,7 @@ else if((totaltcount > triggertransfer) && (File.Exists(dir)))
               string newlist = resnamecheck + ", " + tempcount[0] +":" + datestring +":"+ rewarddays +":"+ datestring;
               File.WriteAllText(dir2, newlist);
               plugin.PRoConChat("New Player," + tempcount[0] + "added to end of the reserve slot list.");
+              plugin.Log(logdir, "New Player," + tempcount[0] + "added to end of the reserve slot list with " + rewarddays.ToString() + " day(s) remaining.");
               }
             }
           }
@@ -124,6 +128,7 @@ else if((totaltcount > triggertransfer) && (File.Exists(dir)))
           string newlist = "Blank, "+tempcount[0] +":"+ datestring +":"+ rewarddays +":"+ datestring;
           File.WriteAllText(dir2, newlist);
           plugin.PRoConChat("Reserve slot list created with first player," + tempcount[0] + ".");
+          plugin.Log(logdir, "Reserve slot list created with first player," + tempcount[0] + ".");
           }
         }
       else if (runcount >= numoftemps)break;

@@ -34,10 +34,12 @@ if(File.Exists(dir))
           if (!plugin.GetReservedSlotsList().Contains(rescount[0]))
              {
              plugin.PRoConChat(rescount[0] + " got removed from the ReserveSlot successfully.");
+             plugin.Log(logdir, rescount[0] + " got removed from the ReserveSlot successfully.");
              }
           else 
              {
              plugin.PRoConChat(rescount[0] + " failed to get removed from the ReserveSlot.");
+             plugin.Log(logdir, rescount[0] + " failed to get removed from the ReserveSlot.");
              }
           //plugin.ConsoleWrite(value.ToString());
           namecheck = namecheck.Replace(resname, rescount[0]+":"+ rescount[1] +":"+value.ToString()+":"+ datestring);
@@ -60,11 +62,12 @@ if(File.Exists(dir))
           }
         if (plugin.GetReservedSlotsList().Contains(rescount[0]))
           {
-         plugin.Log(logdir, rescount[0] + " has " + value.ToString() + " day(s) left in the ReserveSlot list.");
+            if(value > RSOffThresh) plugin.Log(logdir, rescount[0] + " has " + value.ToString() + " day(s) left in the ReserveSlot list.");
           }
         else
           {
-         plugin.Log(logdir, rescount[0] + " has " + value.ToString() + " day(s) left until he exists no more as he/she is a 2nd time no show.");
+          if (value > RSOffThresh) plugin.Log(logdir, rescount[0] + " has " + value.ToString() + " day(s) left until he exists no more as he/she is a 2nd time no show.");
+          else if(value <= RSDellThresh) plugin.Log(logdir, rescount[0] + " has been deleted from the ReserveList.");
           }
         }
       }
