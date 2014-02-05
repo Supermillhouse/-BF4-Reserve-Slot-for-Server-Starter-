@@ -97,7 +97,7 @@ else if((totaltcount > triggertransfer) && (File.Exists(dir)))
                     plugin.Log(logdir, rescount[0] + " got added to the ReserveSlot successfully with " + value.ToString() + " day(s) remaining.");
                     }
                   //message player
-                  plugin.SendPlayerMessage(rescount[0], rescount[0] + ": You have been awarded a reserve slot for helping to start the server, it will expire in approximately "+value+" days unless you help again.");
+                  plugin.SendPlayerYell(rescount[0], rescount[0] + ": You have been awarded a reserve slot for helping to start the server, it will expire in approximately "+value+" days unless you help again.", 5);
                   }
                 }
               //notify you that a player tried to help twice or more on a day to start server 

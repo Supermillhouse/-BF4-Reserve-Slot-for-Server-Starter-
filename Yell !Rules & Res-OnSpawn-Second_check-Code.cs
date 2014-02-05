@@ -40,7 +40,7 @@ if(File.Exists(dir))
 ThreadStart AdminYell = delegate  {
 //5 second delay before yelling the reward message
   Thread.Sleep(5*1000);
-  plugin.SendPlayerMessage(player.Name, yellMsg); // it is a player message until yell is working
+  plugin.SendPlayerYell(player.Name, yellMsg, 5);
   };
 
 // Main thread code
