@@ -93,16 +93,8 @@ else if((totaltcount > triggertransfer) && (File.Exists(dir)))
                     {
                     plugin.ServerCommand("reservedSlotsList.add", rescount[0]);
                     plugin.ServerCommand("reservedSlotsList.save");
-                    if (plugin.GetReservedSlotsList().Contains(rescount[0]))
-                      {
-                      plugin.PRoConChat(rescount[0] + " got added to ReserveSlot successfully with " + value.ToString() + " day(s) remaining.");
-                      plugin.Log(logdir, rescount[0] + " got added to the ReserveSlot successfully with " + value.ToString() + " day(s) remaining.");
-                      }
-                    else 
-                      {
-                      plugin.PRoConChat(rescount[0] + " failed to get added to the ReserveSlot.");
-                      plugin.Log(logdir, rescount[0] + " failed to get added to the ReserveSlot.");
-                      }
+                    plugin.PRoConChat(rescount[0] + " got added to ReserveSlot successfully with " + value.ToString() + " day(s) remaining.");
+                    plugin.Log(logdir, rescount[0] + " got added to the ReserveSlot successfully with " + value.ToString() + " day(s) remaining.");
                     }
                   //message player
                   plugin.SendPlayerMessage(rescount[0], rescount[0] + ": You have been awarded a reserve slot for helping to start the server, it will expire in approximately "+value+" days unless you help again.");

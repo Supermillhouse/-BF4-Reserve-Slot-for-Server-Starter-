@@ -31,16 +31,8 @@ if(File.Exists(dir))
           {
           plugin.ServerCommand("reservedSlotsList.remove", rescount[0]);
           plugin.ServerCommand("reservedSlotsList.save");
-          if (!plugin.GetReservedSlotsList().Contains(rescount[0]))
-             {
-             plugin.PRoConChat(rescount[0] + " got removed from the ReserveSlot successfully.");
-             plugin.Log(logdir, rescount[0] + " got removed from the ReserveSlot successfully.");
-             }
-          else 
-             {
-             plugin.PRoConChat(rescount[0] + " failed to get removed from the ReserveSlot.");
-             plugin.Log(logdir, rescount[0] + " failed to get removed from the ReserveSlot.");
-             }
+          plugin.PRoConChat(rescount[0] + " was removed from the ReserveSlot.");
+          plugin.Log(logdir, rescount[0] + " was removed from the ReserveSlot.");
           //plugin.ConsoleWrite(value.ToString());
           namecheck = namecheck.Replace(resname, rescount[0]+":"+ rescount[1] +":"+value.ToString()+":"+ datestring);
           plugin.ConsoleWrite(namecheck);
