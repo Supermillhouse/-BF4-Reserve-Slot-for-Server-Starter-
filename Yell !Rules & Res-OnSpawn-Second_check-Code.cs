@@ -1,6 +1,10 @@
 if (limit.Activations(player.Name) > 1) return false;
 
-plugin.Log("Logs/InsaneLimits/GUID5-7-13.log", plugin.R("[%date% %time%] [%p_ct% - %p_n%]    >>EA GUID:    %p_eg%<<         and         >>PB GUID:    %p_pg%<<     and      >>IP:    %p_ip%<<"));
+string path = "Logs/InsaneLimits/GUID5-7-13.log";
+string logdir = Path.GetDirectoryName(path); 
+if (!Directory.Exists(logdir)) Directory.CreateDirectory(logdir);
+
+plugin.Log(path, plugin.R("[%date% %time%] [%p_ct% - %p_n%]    >>EA GUID:    %p_eg%<<         and         >>PB GUID:    %p_pg%<<     and      >>IP:    %p_ip%<<"));
 //The thread code below allows me to delay the reward message on first spawn because directly below this text is a !rules yell. It then yells the reward message 5 seconds later
 
 //simple yell to start for type !rules for server rules
