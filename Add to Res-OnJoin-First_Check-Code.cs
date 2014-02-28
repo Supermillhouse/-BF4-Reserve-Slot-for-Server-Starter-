@@ -16,6 +16,7 @@ string host = server.Host;
 string dir = "Plugins\\BF4\\TempList_" +host+ "_" +port+ ".txt";
 string done = "Plugins\\BF4\\Done_" +host+ "_" +port+ ".txt";
 string logdir = "Logs\\InsaneLimits\\ReserveList_" +host+ "_" +port+ "dump_file.txt";
+if (!Directory.Exists(Path.GetDirectoryName(logdir))) Directory.CreateDirectory(Path.GetDirectoryName(logdir));
 
 List<String> listofplayers = new List<String>();
 
