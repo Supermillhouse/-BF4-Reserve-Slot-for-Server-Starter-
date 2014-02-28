@@ -1,6 +1,6 @@
 if (limit.Activations(player.Name) > 1) return false;
 
-string path = "Logs/InsaneLimits/GUID5-7-13.log";
+string path = "Logs/InsaneLimits/GUID.log";
 string logdir = Path.GetDirectoryName(path); 
 if (!Directory.Exists(logdir)) Directory.CreateDirectory(logdir);
 
